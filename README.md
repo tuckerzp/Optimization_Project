@@ -1,3 +1,3 @@
 Ryan Showalter & Zach Tucker
 
-Optimzation Project
+Optimization Project
