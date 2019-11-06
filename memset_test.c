@@ -5,7 +5,7 @@ MU_TEST(test_memset_unalign) {
     uint8_t x[57];
     uint8_t *r;
 
-    memset(&x, '!', 57);
+    first_memset(&x, '!', 57);
 
     for (int i = 0; i < 57; i++) {
         mu_check(*(x+i) == '!');
