@@ -21,12 +21,12 @@ void *basic_memset(void *s, int c, size_t n) {
 }
 
 /* Implementation of memset that sets memory in groups of 8 bytes */
-void* memset(void *s, int c, size_t n) {
+void* memset_0(void *s, int c, size_t n) {
 
     size_t cnt = 0;
     unsigned char *schar = s;
     uint64_t chars;
-    uint8_t *temp = (uint8_t*) s;
+    uint8_t *temp = (uint8_t*) chars;
     
     // Place c in chars
     for (int i = 0; i < 8; i++) {
