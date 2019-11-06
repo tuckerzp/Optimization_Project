@@ -1,3 +1,4 @@
 *.orig
 *.o
 memset
+memset_perf*
