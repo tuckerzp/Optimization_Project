@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "memset_z.c"
+#include "memset.h"
 
 int main(int argc, char **argv) {
    
@@ -15,5 +15,5 @@ int main(int argc, char **argv) {
     int size = strtol(argv[1], NULL, 10); 
     int s[size], *r;
 
-    r = (int*) basic_memset(s, c, size);
+    r = (int*) first_memset(s, c, size);
 }
