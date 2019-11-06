@@ -1,0 +1,119 @@
+#!/bin/bash
+
+parse_args() {
+  while [ "$#" -gt 0 ]; do
+  case "$1" in
+    -r|--runs) runs=$2; shift 2;;
+    -s|--stat) stat=$2; shift 2;;
+    -n) print_element_nums=1; shift 1;;
+    -p|--program) program_file=$2; shift 2;;
+    -o|--output) output_file="$2"; shift 2;;
+    -h|--help) show_help=1; shift 1;;
+
+    *) print_help; exit 1;;
+  esac
+  done
+}
+
+print_help() {
+    cat <<HELP
+Gather performance metrics.
+Usage: $0 -p <program-file> [-r <n>] -s <stat> [-o <output>]
+    Arguments:
+      -p <filename> program filename
+      -r <n>        run the program n times
+      -o <filename> output filename
+      -s <stat>     run the program for a given statistic
+      -n            include element numbers in output
+      -h            show this help message
+
+    Run 'perf list' for a list of stat options.
+    We suggest the following statistics
+      cycles, duration_time (ns), minor-faults, major-faults
+      branch-instructions, branch-misses
+HELP
+}
+
+run_perf() {
+    for n in "${element_nums[@]}"; do
+        curr_runs=()
+        min=2**48
+        
+        for i in $(seq 1 $runs); do
+            curr_runs+=(`perf stat -e $stat $program_file $n 2>&1 > /dev/null \
+                | grep --only-matching --perl-regexp "\d*,(,?\d*)*" \
+                | tr --delete ,`)
+
+        done
+
+        for x in "${curr_runs[@]}"; do
+            (( x < min )) && min=$x
+        done
+
+        if [[ -z "$output_file" ]]; then
+            printf "%s\n" "$min"
+        else
+            printf "%s\n" "$min" >> $output_file
+        fi
+
+    done
+}
+
+main() {
+  runs=1
+  output_file=""
+  program_file=""
+  print_element_nums=0
+  show_help=0
+  stat=""
+
+  element_nums=($(seq 100000 50000 1000000))
+
+  parse_args "$@"
+
+  if [ "$show_help" -eq 1 ]; then
+    print_help
+    exit 0
+  fi
+
+  if [ "$print_element_nums" -eq 1 ]; then
+
+      if [[ -z "$output_file" ]]; then
+        echo "Intervals:"
+        echo
+      else
+        echo "Intervals:" >> $output_file
+        echo >> $output_file
+      fi
+
+      for i in "${element_nums[@]}"; do
+          if [[ -z "$output_file" ]]; then
+            echo $i
+          else
+            echo $i >> $output_file
+          fi
+      done
+
+      if [[ -z "$output_file" ]]; then
+          echo
+          echo
+      else
+          echo >> $output_file
+          echo >> $output_file
+      fi
+  fi
+
+  if [[ -z "$program_file" ]]; then
+      echo "Please specify a program file with -p <program-file>"
+      print_help
+      exit 1
+  fi
+
+  if [ -n "$stat" ]; then
+      run_perf
+  fi
+
+  exit 0
+}
+
+main "$@"
