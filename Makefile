@@ -6,7 +6,7 @@ memset_perf: memset.c main.c
 	gcc -g memset.c main.c -o memset_perf
 
 memset_perf2: memset.c main.c
-	gcc -g -O2 memset main.c -o memset_perf
+	gcc -g -O2 memset.c main.c -o memset_perf
 
 clean:
 	$(RM) memset
