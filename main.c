@@ -15,5 +15,7 @@ int main(int argc, char **argv) {
     int size = strtol(argv[1], NULL, 10); 
     int s[size], *r;
 
-    r = (int*) first_memset(s, c, size);
+    r = (int*) basic_memset(s, c, size);
+    // r = (int*) first_memset(s, c, size);
+    // r = (int*) unroll_memset(s, c, size);
 }
