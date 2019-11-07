@@ -1,18 +1,18 @@
 #!/bin/bash
 
 parse_args() {
-  while [ "$#" -gt 0 ]; do
-  case "$1" in
-    -r|--runs) runs=$2; shift 2;;
-    -s|--stat) stat=$2; shift 2;;
-    -n) print_element_nums=1; shift 1;;
-    -p|--program) program_file=$2; shift 2;;
-    -o|--output) output_file="$2"; shift 2;;
-    -h|--help) show_help=1; shift 1;;
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -r|--runs) runs=$2; shift 2;;
+            -s|--stat) stat=$2; shift 2;;
+            -n) print_element_nums=1; shift 1;;
+            -p|--program) program_file=$2; shift 2;;
+            -o|--output) output_file="$2"; shift 2;;
+            -h|--help) show_help=1; shift 1;;
 
-    *) print_help; exit 1;;
-  esac
-  done
+            *) print_help; exit 1;;
+        esac
+    done
 }
 
 print_help() {
@@ -60,60 +60,60 @@ run_perf() {
 }
 
 main() {
-  runs=1
-  output_file=""
-  program_file=""
-  print_element_nums=0
-  show_help=0
-  stat=""
+    runs=1
+    output_file=""
+    program_file=""
+    print_element_nums=0
+    show_help=0
+    stat=""
 
-  element_nums=($(seq 100000 50000 1000000))
+    element_nums=($(seq 100000 50000 1000000))
 
-  parse_args "$@"
+    parse_args "$@"
 
-  if [ "$show_help" -eq 1 ]; then
-    print_help
+    if [ "$show_help" -eq 1 ]; then
+        print_help
+        exit 0
+    fi
+
+    if [ "$print_element_nums" -eq 1 ]; then
+
+        if [[ -z "$output_file" ]]; then
+            echo "Intervals:"
+            echo
+        else
+            echo "Intervals:" >> $output_file
+            echo >> $output_file
+        fi
+
+        for i in "${element_nums[@]}"; do
+            if [[ -z "$output_file" ]]; then
+                echo $i
+            else
+                echo $i >> $output_file
+            fi
+        done
+
+        if [[ -z "$output_file" ]]; then
+            echo
+            echo
+        else
+            echo >> $output_file
+            echo >> $output_file
+        fi
+    fi
+
+    if [[ -z "$program_file" ]]; then
+        echo "Please specify a program file with -p <program-file>"
+        print_help
+        exit 1
+    fi
+
+    if [ -n "$stat" ]; then
+        run_perf
+    fi
+
     exit 0
-  fi
-
-  if [ "$print_element_nums" -eq 1 ]; then
-
-      if [[ -z "$output_file" ]]; then
-        echo "Intervals:"
-        echo
-      else
-        echo "Intervals:" >> $output_file
-        echo >> $output_file
-      fi
-
-      for i in "${element_nums[@]}"; do
-          if [[ -z "$output_file" ]]; then
-            echo $i
-          else
-            echo $i >> $output_file
-          fi
-      done
-
-      if [[ -z "$output_file" ]]; then
-          echo
-          echo
-      else
-          echo >> $output_file
-          echo >> $output_file
-      fi
-  fi
-
-  if [[ -z "$program_file" ]]; then
-      echo "Please specify a program file with -p <program-file>"
-      print_help
-      exit 1
-  fi
-
-  if [ -n "$stat" ]; then
-      run_perf
-  fi
-
-  exit 0
 }
 
 main "$@"
