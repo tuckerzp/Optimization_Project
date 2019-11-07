@@ -2,12 +2,12 @@
 #include "memset.h"
 
 MU_TEST(test_memset_unalign) {
-    uint8_t x[57];
+    uint8_t x[385];
     uint8_t *r;
 
-    first_memset(&x, '!', 57);
+    unroll4_memset(&x, '!', 385);
 
-    for (int i = 0; i < 57; i++) {
+    for (int i = 0; i < 385; i++) {
         mu_check(*(x+i) == '!');
     }
 }
