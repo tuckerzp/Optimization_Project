@@ -16,7 +16,9 @@ int main(int argc, char **argv) {
     int s[size], *r;
 
     // r = (int*) basic_memset(s, c, size);
-    // r = (int*) first_memset(s, c, size);
+    r = (int*) first_memset(s, c, size);
+    // r = (int*) unroll16_memset(s, c, size);
     // r = (int*) unroll8_memset(s, c, size);
-    r = (int*) unroll4_memset(s, c, size);
+    // r = (int*) unroll4_memset(s, c, size);
+    // r = (int*) unroll2_memset(s, c, size);
 }
