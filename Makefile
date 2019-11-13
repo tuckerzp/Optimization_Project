@@ -1,6 +1,9 @@
 # build memset and tests
-test: memset.c memset_test.c
+test_m: memset.c memset_test.c
 	gcc -O0 --std=c99 -g memset.c memset_test.c -o memset
+
+test_h: horners.c horners_test.c
+	gcc -O0 --std=c99 -g horners.c horners_test.c -o horners
 
 # Make memset as well as the driver
 memset_perf0: memset.c m_main.c
