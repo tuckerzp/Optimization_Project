@@ -18,17 +18,6 @@ double poly(double a[], double x, long degree) {
     return result;
 }
 
-/* Evaluation of a polynomial by Horner's method */
-double polyh(double a[], double x, long degree) {
-    
-    long i;
-    double result = a[degree];
-    for (i = degree - 1; i >= 0; i--) {
-        result = a[i] + x * result;
-    }
-    return result;
-}
-
 double unroll2_poly(double a[], double x, long degree) {
     long i;
     double result = a[0];
@@ -126,4 +115,47 @@ double unroll4x4_poly(double a[], double x, long degree) {
     return result + (acc0 + acc1) + (acc2 + acc3);
 }
 
+/* Evaluation of a polynomial by Horner's method */
+double polyh(double a[], double x, long degree) {
+    
+    long i;
+    double result = a[degree];
+    for (i = degree - 1; i >= 0; i--) {
+        result = a[i] + x * result;
+    }
+    return result;
+}
+
+double unroll2_polyh(double a[], double x, long degree) {
+
+    long i;
+    double result = a[degree];
+
+    for (i = degree - 1; i - 1 >= 0; i -= 2) {
+        result = a[i] + (x * result);
+        result = a[i + 1] + (x * result);
+    }
+
+    for (; i >= 0; i--) {
+        result = a[i] + (x * result);
+    }
+
+    return result;
+}
+
+double unroll4_polyh(double a[], double x, long degree) {
+    long i;
+    double result = a[degree];
+
+    for (i = degree -1; i - 3 >= 0; i -= 4) {
+        result = a[i] + (x * result);
+        result = a[i + 1] + (x * result);
+        result = a[i + 2] + (x * result);
+        result = a[i + 3] + (x * result);
+    }
+
+    for (; i >= 0; i--) {
+        result = a[i] + (x * result);
+    }
+}
 
