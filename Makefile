@@ -31,6 +31,20 @@ horners_perf2: horners.c h_main.c
 horners_perf3: horners.c h_main.c
 	gcc --std=c99 -O3 horners.c h_main.c -o horners_perf
 
+# Make psum as well as the driver
+psum_perf0: psum.c p_main.c
+	gcc --std=c99 -O0 psum.c p_main.c -o psum_perf
+
+psum_perf1: memset.c m_main.c psum.c p_main.c
+	gcc --std=c99 -O1 psum.c p_main.c -o psum_perf
+
+psum_perf2: memset.c m_main.c psum.c p_main.c
+	gcc --std=c99 -O2 psum.c p_main.c -o psum_perf
+
+psum_perf3: psum.c p_main.c
+	gcc --std=c99 -O3 psum.c p_main.c -o psum_perf
+
+
 # Remove executables
 clean:
 	$(RM) memset memset_perf horners_perf horners
