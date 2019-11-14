@@ -1,9 +1,12 @@
-# build memset and tests
+# build tests
 test_m: memset.c memset_test.c
 	gcc -O0 --std=c99 -g memset.c memset_test.c -o memset
 
 test_h: horners.c horners_test.c
 	gcc -O0 --std=c99 -g horners.c horners_test.c -o horners
+
+test_p: psum.c psum_test.c
+	gcc -O0 --std=c99 -g psum.c psum_test.c -o psum
 
 # Make memset as well as the driver
 memset_perf0: memset.c m_main.c
@@ -44,7 +47,6 @@ psum_perf2: memset.c m_main.c psum.c p_main.c
 psum_perf3: psum.c p_main.c
 	gcc --std=c99 -O3 psum.c p_main.c -o psum_perf
 
-
 # Remove executables
 clean:
-	$(RM) memset memset_perf horners_perf horners
+	$(RM) memset memset_perf horners_perf horners psum_perf psum
