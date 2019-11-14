@@ -33,4 +33,4 @@ horners_perf3: horners.c h_main.c
 
 # Remove executables
 clean:
-	$(RM) memset memset_perf
+	$(RM) memset memset_perf horners_perf horners
