@@ -5,6 +5,9 @@ parse_args() {
         case "$1" in
             -r|--runs) runs=$2; shift 2;;
             -s|--stat) stat=$2; shift 2;;
+            -b) begin=$2; shift 2;;
+            -m) step_size=$2; shift 2;;
+            -l) limit=$2; shift 2;;
             -n) print_element_nums=1; shift 1;;
             -p|--program) program_file=$2; shift 2;;
             -o|--output) output_file="$2"; shift 2;;
@@ -22,6 +25,9 @@ Usage: $0 -p <program-file> [-r <n>] -s <stat> [-o <output>]
     Arguments:
       -p <filename> program filename
       -r <n>        run the program n times
+      -b <b>        use b as the lowest number of elements
+      -l <l>        use a limit of m for the number of elements
+      -m <m>        use step sizes of m for the number of elements
       -o <filename> output filename
       -s <stat>     run the program for a given statistic
       -n            include element numbers in output
@@ -61,15 +67,18 @@ run_perf() {
 
 main() {
     runs=1
+    begin=100000
+    limit=1000000
+    step_size=50000
     output_file=""
     program_file=""
     print_element_nums=0
     show_help=0
     stat=""
 
-    element_nums=($(seq 100000 50000 1000000))
-
     parse_args "$@"
+
+    element_nums=($(seq $begin $step_size $limit))
 
     if [ "$show_help" -eq 1 ]; then
         print_help
