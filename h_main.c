@@ -30,5 +30,8 @@ int main(int argc, char **argv) {
     // p = unroll2x2_poly(a, x, degree);
     // p = unroll4_poly(a, x, degree);
     // p = unroll4x4_poly(a, x, degree);
-    // p = polyh(a, x, degree;
+    // p = polyh(a, x, degree);
+    // p = unroll2_polyh(a, x, degree);
+    // p = unroll4_polyh(a, x, degree);
 }
+
