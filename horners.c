@@ -227,7 +227,7 @@ double unroll2_polyh(double a[], double x, long degree) {
 
     for (i = degree - 1; i >= 1; i -= 2) {
         result = a[i] + (x * result);
-        result = a[i + 1] + (x * result);
+        result = a[i - 1] + (x * result);
     }
 
     for (; i >= 0; i--) {
@@ -241,11 +241,11 @@ double unroll4_polyh(double a[], double x, long degree) {
     long i;
     double result = a[degree];
 
-    for (i = degree -1; i >= 3; i -= 4) {
+    for (i = degree - 1; i >= 3; i -= 4) {
         result = a[i] + (x * result);
-        result = a[i + 1] + (x * result);
-        result = a[i + 2] + (x * result);
-        result = a[i + 3] + (x * result);
+        result = a[i - 1] + (x * result);
+        result = a[i - 2] + (x * result);
+        result = a[i - 3] + (x * result);
     }
 
     for (; i >= 0; i--) {
@@ -277,7 +277,7 @@ double unroll4a_polyh(double a[], double x, long degree) {
     double result = a[degree];
 
     for (i = degree - 1; i >= 3; i -= 4) {
-        result = (a[i - 3] + x * a[i - 2]) + (x2 * a[i - 1] + x3 * a[i]) + x4 * result;
+        result = ((a[i - 3] + x * a[i - 2]) + (x2 * a[i - 1] + x3 * a[i])) + x4 * result;
     }
 
     for (; i >= 0; i--) {

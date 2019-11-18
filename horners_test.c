@@ -5,29 +5,40 @@
 MU_TEST(test_horners) {
     double test = 0.0;
     double compare = 0.0;
-    double tolerance = 0.1;
     
-    long degree = 500000;
+    long degree = 100000;
     long i;
-    double x = 2.15;
-    double a[degree];
+    double x = 0.914;
+    double a[degree + 1];
     double p;
 
-    for (i = 0; i + 5 < degree; i++) {
-        a[i] = 1.1;
-        a[i + 1] = 2.2;
-        a[i + 2] = 3.3;
-        a[i + 3] = 4.4;
-        a[i + 4] = 5.5;
+    for (i = 0; i + 5 <= degree; i += 5) {
+        a[i] = 0.561;
+        a[i + 1] = 0;
+        a[i + 2] = 0.06;
+        a[i + 3] = 2.14892;
+        a[i + 4] = 10;
     }
-    for (; i < degree; i++) {
-        a[i] = 6.6;
+    for (; i <= degree; i++) {
+        a[i] = 1;
     }
     
     compare = poly(a, x, degree);
-    test = poly(a, x, degree);    // Change this to test
+    test = unroll2a_poly_mix(a, x, degree);    // Change this to test
 
-    mu_check(abs(test - compare) < tolerance);
+    mu_assert_double_eq(compare, unroll2_poly(a, x, degree));
+    mu_assert_double_eq(compare, unroll2x2_poly(a, x, degree));
+    mu_assert_double_eq(compare, unroll4_poly(a, x, degree));
+    mu_assert_double_eq(compare, unroll4x4_poly(a, x, degree));
+    mu_assert_double_eq(compare, unroll2a_poly(a, x, degree));
+    mu_assert_double_eq(compare, unroll4a_poly(a, x, degree));
+    mu_assert_double_eq(compare, unroll2a_poly_mix(a, x, degree));
+    mu_assert_double_eq(compare, unroll4a_poly_mix(a, x, degree));
+    mu_assert_double_eq(compare, unroll2_polyh(a, x, degree));
+    mu_assert_double_eq(compare, unroll4_polyh(a, x, degree));
+    mu_assert_double_eq(compare, unroll2a_polyh(a, x, degree));
+    mu_assert_double_eq(compare, unroll4a_polyh(a, x, degree));
+
 }
 
 MU_TEST_SUITE(test_suite) {
