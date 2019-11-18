@@ -13,16 +13,16 @@ int main(int argc, char **argv) {
     
     long degree = strtol(argv[1], NULL, 10);
     long i;
-    double x = 2.15;
+    double x = 0.92;
     double a[200001]; // 200,001 elements
     double p;
 
-    for (i = 0; i + 5 < 200000; i++) {
-        a[i] = 1.1;
-        a[i + 1] = 2.2;
-        a[i + 2] = 3.3;
-        a[i + 3] = 4.4;
-        a[i + 4] = 5.5;
+    for (i = 0; i + 5 < 200000; i += 5) {
+        a[i] = 0.292;
+        a[i + 1] = 6;
+        a[i + 2] = 1;
+        a[i + 3] = 0;
+        a[i + 4] = 0.8;
     }
     
     // p = poly(a, x, degree);
