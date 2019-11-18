@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     long degree = strtol(argv[1], NULL, 10);
     long i;
     double x = 2.15;
-    double a[200000]; // 200,000 elements
+    double a[200001]; // 200,001 elements
     double p;
 
     for (i = 0; i + 5 < 200000; i++) {
@@ -30,8 +30,14 @@ int main(int argc, char **argv) {
     // p = unroll2x2_poly(a, x, degree);
     // p = unroll4_poly(a, x, degree);
     // p = unroll4x4_poly(a, x, degree);
+    // p = unroll2a_poly(a, x, degree);
+    // p = unroll4a_poly(a, x, degree);
+    // p = unroll2a_poly_mix(a, x, degree);
+    // p = unroll4a_poly_mix(a, x, degree);
     // p = polyh(a, x, degree);
     // p = unroll2_polyh(a, x, degree);
     // p = unroll4_polyh(a, x, degree);
+    // p = unroll2a_polyh(a, x, degree);
+    // p = unroll4a_polyh(a, x, degree);
 }
 
