@@ -24,7 +24,6 @@ MU_TEST(test_horners) {
     }
     
     compare = poly(a, x, degree);
-    test = unroll2a_poly_mix(a, x, degree);    // Change this to test
 
     mu_assert_double_eq(compare, unroll2_poly(a, x, degree));
     mu_assert_double_eq(compare, unroll2x2_poly(a, x, degree));
