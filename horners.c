@@ -147,7 +147,7 @@ double unroll4a_poly(double a[], double x, long degree) {
         xpwr *= x4;
     }
 
-    for (; i <= degree; i += 4) {
+    for (; i <= degree; i++) {
         result += a[i] * xpwr;
         xpwr *= x;
     }
@@ -165,7 +165,7 @@ double unroll2a_poly_mix(double a[], double x, long degree) {
     
     double x2 = x * x;
 
-    for (i = 1; i <= degree - 1; i++) {
+    for (i = 1; i <= degree - 1; i += 2) {
         acc0 += a[i] * xpwr;
         acc1 += a[i + 1] * xpwr;
         xpwr *= x2;
@@ -191,7 +191,7 @@ double unroll4a_poly_mix(double a[], double x, long degree) {
     double acc2 = 0;
     double acc3 = 0;
 
-    for (i = 1; i <= degree - 3; i++) {
+    for (i = 1; i <= degree - 3; i += 4) {
         acc0 += a[i] * xpwr;
         acc1 += a[i + 1] * xpwr;
         acc2 += a[i + 2] * xpwr;
