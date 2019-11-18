@@ -147,7 +147,7 @@ double unroll4a_poly(double a[], double x, long degree) {
         xpwr *= x4;
     }
 
-    for (; i <= degree; i += 4) {
+    for (; i <= degree; i++) {
         result += a[i] * xpwr;
         xpwr *= x;
     }
@@ -165,7 +165,7 @@ double unroll2a_poly_mix(double a[], double x, long degree) {
     
     double x2 = x * x;
 
-    for (i = 1; i <= degree - 1; i++) {
+    for (i = 1; i <= degree - 1; i += 2) {
         acc0 += a[i] * xpwr;
         acc1 += a[i + 1] * xpwr;
         xpwr *= x2;
@@ -191,7 +191,7 @@ double unroll4a_poly_mix(double a[], double x, long degree) {
     double acc2 = 0;
     double acc3 = 0;
 
-    for (i = 1; i <= degree - 3; i++) {
+    for (i = 1; i <= degree - 3; i += 4) {
         acc0 += a[i] * xpwr;
         acc1 += a[i + 1] * xpwr;
         acc2 += a[i + 2] * xpwr;
@@ -227,7 +227,7 @@ double unroll2_polyh(double a[], double x, long degree) {
 
     for (i = degree - 1; i >= 1; i -= 2) {
         result = a[i] + (x * result);
-        result = a[i + 1] + (x * result);
+        result = a[i - 1] + (x * result);
     }
 
     for (; i >= 0; i--) {
@@ -241,11 +241,11 @@ double unroll4_polyh(double a[], double x, long degree) {
     long i;
     double result = a[degree];
 
-    for (i = degree -1; i >= 3; i -= 4) {
+    for (i = degree - 1; i >= 3; i -= 4) {
         result = a[i] + (x * result);
-        result = a[i + 1] + (x * result);
-        result = a[i + 2] + (x * result);
-        result = a[i + 3] + (x * result);
+        result = a[i - 1] + (x * result);
+        result = a[i - 2] + (x * result);
+        result = a[i - 3] + (x * result);
     }
 
     for (; i >= 0; i--) {
@@ -277,7 +277,7 @@ double unroll4a_polyh(double a[], double x, long degree) {
     double result = a[degree];
 
     for (i = degree - 1; i >= 3; i -= 4) {
-        result = (a[i - 3] + x * a[i - 2]) + (x2 * a[i - 1] + x3 * a[i]) + x4 * result;
+        result = ((a[i - 3] + x * a[i - 2]) + (x2 * a[i - 1] + x3 * a[i])) + x4 * result;
     }
 
     for (; i >= 0; i--) {
