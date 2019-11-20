@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     
     long degree = strtol(argv[1], NULL, 10);
     long i;
-    double x = 0.92;
+    double x = 0.0625;
     double a[200001]; // 200,001 elements
     double p;
 
