@@ -251,6 +251,8 @@ double unroll4_polyh(double a[], double x, long degree) {
     for (; i >= 0; i--) {
         result = a[i] + (x * result);
     }
+    
+    return result;
 }
 
 double unroll2a_polyh(double a[], double x, long degree) {
