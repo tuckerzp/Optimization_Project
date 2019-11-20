@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
     float a[200000]; // 200,000 elements
     float p[200000];
 
-    for (i = 0; i + 5 < 200000; i++) {
+    for (i = 0; i < 199996; i += 5) {
         a[i]     = 1.1;
         a[i + 1] = 2.2;
         a[i + 2] = 3.3;
@@ -26,5 +26,8 @@ int main(int argc, char **argv) {
 
     // psum1(a, p, n);
     // psum2(a, p, n);
+    // psum4(a, p, n);
     // psum1a(a, p, n);
+    // psum2a(a, p, n);
+    // psum3a(a, p, n);
 }
