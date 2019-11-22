@@ -10,6 +10,7 @@ MU_TEST(test_psum) {
     float a[n];
     float p2[n];
     float p4[n];
+    float p4_b[n];
     float p2a[n];
     float p3a[n];
     float compare[n];
@@ -25,12 +26,14 @@ MU_TEST(test_psum) {
     psum1(a, compare, n);
     psum2(a, p2, n);
     psum4(a, p4, n);
+    psum4_b(a, p4_b, n);
     psum2a(a, p2a, n);
     psum3a(a, p3a, n);
     
     for (i = 0; i < n; i++) {
         mu_assert_double_eq(compare[i], p2[i]);
         mu_assert_double_eq(compare[i], p4[i]);
+        mu_assert_double_eq(compare[i], p4_b[i]);
         mu_assert_double_eq(compare[i], p2a[i]);
         mu_assert_double_eq(compare[i], p3a[i]);
     }

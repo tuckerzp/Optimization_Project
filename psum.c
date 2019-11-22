@@ -57,6 +57,40 @@ void psum4(float a[], float p[], long n) {
     }
 }
 
+void psum4_b(float a[], float p[], long n) {
+    long i;
+    float last_val = p[0] = a[0];
+
+    float a0, a1, a2, a3;
+    float tmp0, tmp1, tmp2, tmp3;
+
+    for (i = 1; i < n - 3; i += 4) {
+        
+        a0 = a[i];
+        a1 = a[i + 1];
+        a2 = a[i + 2];
+        a3 = a[i + 3];
+
+        tmp0 = last_val + a0;
+        tmp1 = tmp0 + a1;
+        tmp2 = tmp1 + a2;
+        tmp3 = tmp2 + a3;
+
+        p[i] = tmp0;
+        p[i + 1] = tmp1;
+        p[i + 2] = tmp2;
+        p[i + 3] = tmp3;
+
+        last_val += (a0 + a1) + (a2 + a3);
+    }
+
+    for (; i < n; i++) {
+        tmp0 = last_val + a[i];
+        p[i] = tmp0;
+        last_val = tmp0;
+    }
+}
+
 /* Compute prefix sum of a vector a */
 void psum1a(float a[], float p[], long n) {
     
