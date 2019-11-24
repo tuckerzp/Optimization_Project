@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
     // psum1(a, p, n);
     // psum2(a, p, n);
     // psum4(a, p, n);
+    // psum4_b(a, p, n);
     // psum1a(a, p, n);
     // psum2a(a, p, n);
     // psum3a(a, p, n);
