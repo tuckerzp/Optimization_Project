@@ -1,8 +1,4 @@
 *.orig
 *.o
-memset
-memset_perf
-horners
-horners_perf
-psum
-psum_perf
+*/test
+*/*_perf

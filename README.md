@@ -3,22 +3,14 @@
 ## Set up
 
 1. Clone the repository
-2. Run `git submodule init && git submodule update` to add the testing framework
+2. Run `./setup.sh` to set up the testing framework.
 
-### For memset:
+### Testing Performance:
 
-1. If you want to test any of the versions of memset, edit `memset_test.c`
-to call the specific version of memset that you wish to test. Then,
-run `make test` and `./memset` to run the tests.
-
-2. If you want to run performance tests, edit `main.c` and call the version
-of memset that you want to test. Then, run `make memset_perf(0|1|2|3)` based
-on which gcc optimization level you'd like to use. Then use the provided `pt`
-script. For example, `./pt -p ./memset_perf0 -r 100 -s cycles` will run 
-`memset_perf0` 100 times with 18 different input sizes, printing the minimum
-number of cycles for each input size.
+Enter one of the `memset`, `poly`, or `psum` folders. Run `make test` to run the
+testing framework. The pattern for the make targets for performance tests is
+*program*_perf*optimization level*. For example, `memset_perf2` will run the memset program and the performance test program with optimization flag `-O2` **Remember to edit the driver file before running performance tests.** Simply uncomment the function that needs to be called.
 
 ### For the JMU Cluster
 
-* Put `srun` before your normal `pt` commands to avoid running things on the
-login node.
+* Put `srun` before your normal commands to avoid running things on the login node.
