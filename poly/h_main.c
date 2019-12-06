@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
         a[i + 4] = 0.8;
     }
     
-    // p = poly(a, x, degree);
+    p = poly(a, x, degree);
     // p = unroll2_poly(a, x, degree);
     // p = unroll2x2_poly(a, x, degree);
     // p = unroll4_poly(a, x, degree);

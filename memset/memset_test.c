@@ -1,4 +1,4 @@
-#include "minunit/minunit.h"
+#include "../minunit/minunit.h"
 #include "memset.h"
 
 MU_TEST(test_memset_unalign) {

@@ -1,4 +1,4 @@
-#include "minunit/minunit.h"
+#include "../minunit/minunit.h"
 #include "psum.h"
 #include "stdlib.h"
 
